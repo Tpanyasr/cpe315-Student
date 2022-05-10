@@ -195,6 +195,7 @@ void execute() {
         case ALU_MOV:
           // needs stats and flags
           rf.write(alu.instr.mov.rdn, alu.instr.mov.imm);
+          
           break;
         case ALU_CMP:
           break;
