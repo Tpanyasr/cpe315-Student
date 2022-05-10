@@ -79,6 +79,9 @@ Thumb_Types decode (const ALL_Types data) {
 ALU_Ops decode (const ALU_Type data) {
   if (data.instr.lsli.op == ALU_LSLI_OP) {
     // 315: insert code here to print lsls instruction
+    if (opts.instrs) { 
+      cout << "lsl r" << data.instr.lsli.rd  << ", r" << data.instr.lsli.rn << ", r" << data.instr.lsli.rm << endl;
+    }
     return ALU_LSLI;
   }
   else if (data.instr.addr.op == ALU_ADDR_OP) {
@@ -89,6 +92,9 @@ ALU_Ops decode (const ALU_Type data) {
   }
   else if (data.instr.subr.op == ALU_SUBR_OP) {
     // 315: insert code here to print subs instruction
+    if (opts.instrs) { 
+      cout << "subs r" << data.instr.sub.rd  << ", r" << data.instr.sub.rn << ", r" << data.instr.sub.rm << endl;
+    }
     return ALU_SUBR;
   }
   else if (data.instr.add3i.op == ALU_ADD3I_OP) {
@@ -100,6 +106,9 @@ ALU_Ops decode (const ALU_Type data) {
   }
   else if (data.instr.sub3i.op == ALU_SUB3I_OP) {
     // 315: insert code here to print subs instruction
+    if (opts.instrs) { 
+      cout << "subs r" << data.instr.sub3i.rdn << ", #" << setbase(10) << data.instr.sub3i.imm << endl;
+    }
     return ALU_SUB3I;
   }
   else if (data.instr.add8i.op == ALU_ADD8I_OP) {
@@ -111,6 +120,9 @@ ALU_Ops decode (const ALU_Type data) {
   }
   else if (data.instr.sub8i.op == ALU_SUB8I_OP) {
     // 315: insert code here to print subs instruction
+    if (opts.instrs) { 
+      cout << "subs r" << data.instr.cmp.rdn << ", #" << setbase(10) << data.instr.sub8i.imm << endl;
+    }
     return ALU_SUB8I;
   }
   else if (data.instr.cmp.op == ALU_CMP_OP) { 
@@ -133,6 +145,7 @@ ALU_Ops decode (const ALU_Type data) {
 DP_Ops decode (const DP_Type data) {
   if (data.instr.DP_Instr.op == DP_CMP) {
     // 315: insert code here to print cmp instruction
+        cout << "cmp r" << data.instr.DP_CMP.rdn << ", #" << setbase(10) << data.DP_CMP.imm << endl;
     return DP_CMP;
   }
   else {
