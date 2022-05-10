@@ -80,41 +80,41 @@ ALU_Ops decode (const ALU_Type data) {
   if (data.instr.lsli.op == ALU_LSLI_OP) {
     // 315: insert code here to print lsls instruction
     if (opts.instrs) { 
-      cout << "lsl r" << data.instr.lsli.rd  << ", r" << data.instr.lsli.rn << ", r" << data.instr.lsli.rm << endl;
+      cout << "lsls r" << data.instr.lsli.rd << ", r" << data.instr.lsli.rm << ", #" << data.instr.lsli.imm << endl;
     }
     return ALU_LSLI;
   }
   else if (data.instr.addr.op == ALU_ADDR_OP) {
     if (opts.instrs) { 
-      cout << "adds r" << data.instr.addr.rd  << ", r" << data.instr.addr.rn << ", r" << data.instr.addr.rm << endl;
+      cout << "add r" << data.instr.addr.rd  << ", r" << data.instr.addr.rn << ", r" << data.instr.addr.rm << endl;
     }
     return ALU_ADDR;
   }
   else if (data.instr.subr.op == ALU_SUBR_OP) {
     // 315: insert code here to print subs instruction
     if (opts.instrs) { 
-      cout << "subs r" << data.instr.sub.rd  << ", r" << data.instr.sub.rn << ", r" << data.instr.sub.rm << endl;
+      cout << "subs r" << data.instr.subr.rd  << ", r" << data.instr.subr.rn << ", r" << data.instr.subr.rm << endl;
     }
     return ALU_SUBR;
   }
   else if (data.instr.add3i.op == ALU_ADD3I_OP) {
     // complete
     if (opts.instrs) { 
-      cout << "adds r" << data.instr.add3i.rd << ", r" << data.instr.add3i.rn << ", #" << data.instr.add3i.imm << endl;
+      cout << "add r" << data.instr.add3i.rd << ", r" << data.instr.add3i.rn << ", #" << data.instr.add3i.imm << endl;
     }
     return ALU_ADD3I;
   }
   else if (data.instr.sub3i.op == ALU_SUB3I_OP) {
     // 315: insert code here to print subs instruction
     if (opts.instrs) { 
-      cout << "subs r" << data.instr.sub3i.rdn << ", #" << setbase(10) << data.instr.sub3i.imm << endl;
+      cout << "subs r" << data.instr.sub3i.rd << ", r" << data.instr.sub3i.rn << ", #" << data.instr.add3i.imm << endl;
     }
     return ALU_SUB3I;
   }
   else if (data.instr.add8i.op == ALU_ADD8I_OP) {
     // complete
     if (opts.instrs) { 
-      cout << "adds r" << data.instr.add8i.rdn << ", #" << setbase(10) << data.instr.add8i.imm << endl;
+      cout << "add r" << data.instr.add8i.rdn << ", #" << setbase(10) << data.instr.add8i.imm << endl;
     }
     return ALU_ADD8I;
   }
@@ -145,7 +145,7 @@ ALU_Ops decode (const ALU_Type data) {
 DP_Ops decode (const DP_Type data) {
   if (data.instr.DP_Instr.op == DP_CMP) {
     // 315: insert code here to print cmp instruction
-        cout << "cmp r" << data.instr.DP_CMP.rdn << ", #" << setbase(10) << data.DP_CMP.imm << endl;
+        cout << "cmp r" << data.instr.DP_Instr.rdn << ", r" << data.instr.DP_Instr.rm << endl;
     return DP_CMP;
   }
   else {

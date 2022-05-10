@@ -258,6 +258,29 @@ void execute() {
           rf.write((sp.instr.mov.d << 3 ) | sp.instr.mov.rd, rf[sp.instr.mov.rm]);
           break;
         case SP_ADD:
+
+          // Special SP cases do not update the flags
+          if (sp.instr.add.rm == 13) { // special case: ADD (SP + reg)
+          rf.write((sp.instr.add.d << 3) | sp.instr.add.rd, SP + rf[(sp.instr.add.d << 3) | sp.instr.add.rd]);
+
+          stats.numRegReads += 2;
+          stats.numRegWrites += 1;
+          }
+          else if (sp.instr.add.d == 1 && sp.instr.add.rd == 5) { // special case: ADD (SP + reg)
+          rf.write(SP_REG, SP + rf[sp.instr.add.rm]);
+
+          stats.numRegReads += 2;
+          stats.numRegWrites += 1;
+          }
+          else { // regular case
+          // setCarryOverflow(rf[sp.instr.add.rm], rf[(sp.instr.add.d << 3) | sp.instr.add.rd], OF_ADD);
+          // setNegativeZero(rf[sp.instr.add.rm] + rf[(sp.instr.add.d << 3) | sp.instr.add.rd], 32);
+          rf.write((sp.instr.add.d << 3) | sp.instr.add.rd, rf[sp.instr.add.rm] + rf[(sp.instr.add.d << 3) | sp.instr.add.rd]);
+
+          stats.numRegReads += 2;
+          stats.numRegWrites += 1;
+          }
+          break;
         case SP_CMP:
           // need to implement these
           break;
